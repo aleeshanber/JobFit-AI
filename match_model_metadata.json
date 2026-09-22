@@ -1,0 +1,76 @@
+{
+  "model_type": "RandomForestRegressor(200, seed=42, min_leaf=5) [rf_rich]",
+  "target": "matched_score (candidate-job relevance)",
+  "features": [
+    "overlap_count",
+    "jaccard",
+    "req_coverage",
+    "cand_precision",
+    "candidate_count",
+    "required_count",
+    "candidate_has_skills",
+    "job_has_requirements",
+    "cand_exp_years",
+    "exp_gap",
+    "cand_edu_level",
+    "edu_gap",
+    "cand_cat_breadth",
+    "cat_overlap",
+    "cat_req_coverage",
+    "skills_tfidf_sim",
+    "has_profile"
+  ],
+  "random_seed": 42,
+  "split_strategy": "group-by-canonical-candidate-skills-signature 70/15/15, seed=42",
+  "dataset_rows": 9531,
+  "job_title_count": 28,
+  "profile_source": "DATA/resume_data.csv candidate-side fields (skills/start/end dates/degrees)",
+  "tfidf_corpus": "per-title non-empty required_skills documents",
+  "selection_validation": {
+    "rf_8": {
+      "MAE": 0.128,
+      "RMSE": 0.1648,
+      "R2": 0.0856,
+      "NDCG@10": 0.9058,
+      "mean_Spearman": 0.455
+    },
+    "rf_rich": {
+      "MAE": 0.112,
+      "RMSE": 0.1475,
+      "R2": 0.268,
+      "NDCG@10": 0.9269,
+      "mean_Spearman": 0.5877
+    }
+  },
+  "selection_rationale": "RF-rich wins validation MAE + ranking and holds up on test",
+  "dominance_candidate_count_required_count": {
+    "rf_8": 0.9312,
+    "rf_rich": 0.41669999999999996
+  },
+  "importance_new_features": 0.5264,
+  "importance_overlap_features": 0.0037,
+  "final_test_metrics": {
+    "kind": "final_rf_rich",
+    "n_rows": 1416,
+    "MAE": 0.0969,
+    "RMSE": 0.1238,
+    "R2": 0.4302,
+    "pred_min": 0.3463,
+    "pred_max": 0.8443,
+    "pred_mean": 0.6606,
+    "pred_nan": 0,
+    "pred_inf": 0,
+    "preds_outside_0_1": 0,
+    "n_candidates": 52,
+    "n_full_28job": 50,
+    "NDCG@10": 0.9475,
+    "Recall@10": 0.6622,
+    "Precision@10": 0.7615,
+    "Hit@10": 1.0,
+    "MRR": 0.9439,
+    "mean_Spearman": 0.6665
+  },
+  "trained_at": "2026-09-10 13:27:49",
+  "promoted_to_match_model_pkl": true,
+  "provenance": "Same record as match_step6_metadata.json; MODELS/match_model.pkl was promoted to the Step-6 17-feature richer model (Step-5 8-feature model evaluated and outperformed on validation + held-out test)."
+}
